@@ -14,7 +14,7 @@ $server->on('Connect', function($server, $fd){
 });
 //监听数据接收事件
 $server->on('Receive', function($server, $fd, $from_id, $data){
-    sleep(2);
+    sleep(10);
     echo $data;
     $server->send($fd, '收到111111'.PHP_EOL);
 });
