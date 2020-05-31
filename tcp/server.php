@@ -21,5 +21,15 @@ $server->on('Receive', function($server, $fd, $from_id, $data){
 $server->on('Close', function($server, $fd){
     echo "客户端关闭连接----". $fd.PHP_EOL;
 });
+
+//设定定时器并且退出定时器
+$timerId = $server->tick(1000, function ($id) use ($server) {
+    var_dump($id);
+    $server->clearTimer($id);//$id是定时器的id
+});
+$timerId = $server->tick(1000, function ($id) use ($server) {
+    var_dump($id);
+    $server->clearTimer($id);//$id是定时器的id
+});
 //启动服务
 $server->start();
