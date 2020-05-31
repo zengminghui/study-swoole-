@@ -25,7 +25,8 @@ if (!$client->connect('127.0.0.1', 9501, -1)) {
  * string $data 发送内容【支持二进制数据】
  * @return 成功发送，返回已发数据长度 失败返回 false，并设置 errCode 属性
  */
-$client->send("hello world\n");
+//$client->send("hello world\n");
+$client->send("task\n");
 /**
  * Swoole\Client->recv(int $size = 65535, int $flags = 0): string | false
  * $size 接收数据的缓存区最大长度【此参数不要设置过大，否则会占用较大内存】
