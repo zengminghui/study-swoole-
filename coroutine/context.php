@@ -54,6 +54,24 @@ class Context
 //反之使用 Context 管理上下文 不会出现脏数据
 //调用代码
 $serv = new Server('0.0.0.0',9501);
+//错误代码
+$_array = [];
+$serv->on("Request", function ($req, $resp){
+    global $_array;
+    //请求 /a（协程 1 ）
+    if ($req->server['request_uri'] == '/a') {
+        $_array['name'] = 'a';
+        co::sleep(1.0);
+        echo $_array['name'];
+        $resp->end($_array['name']);
+    }
+    //请求 /b（协程 2 ）
+    else {
+        $_array['name'] = 'b';
+        $resp->end();
+    }
+});
+//正确代码
 $serv->on("Request", function ($req, $resp) {
     if ($req->server['request_uri'] == '/a') {
         Context::put('name', 'a');
