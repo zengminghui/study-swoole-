@@ -42,6 +42,10 @@ $server->on('message', function(Swoole\WebSocket\Server $server, $frame){
 $server->on('close', function ($ser, $fd) {
     echo "client {$fd} closed\n";
 });
+//在start事件回调中获取 master进程pid 和manager进程pid
+$server->on('start', function($serv){
+    var_dump($serv->master_pid, $serv->manager_pid);
+});
 
 //启动服务
 $server->start();
